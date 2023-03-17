@@ -4,7 +4,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 import seaborn as sns
-
+import pickle
+import json
+from keras.models import model_from_json
+import datetime
 
 # Def to combine all CSV files in a directory into a single DataFrame
 def combine_csv_files_to_df(dir_path):
@@ -112,3 +115,65 @@ def mean_dur(df, class_name):
     mean_dur = round(sum(duration)/len(duration),2)
             
     return mean_dur
+
+# Save the results of PCA to a csv file
+def save_pca_results_to_csv(pca_model, pca_data, filename):
+    # Transform the data
+    pca_data_transformed = pca_model.transform(pca_data[pca_data.columns[:-1]])
+    df_pca = pd.DataFrame(data = pca_data_transformed)
+    df_labels = pd.DataFrame(pca_data.iloc[:,-1:])
+    df_labels = df_labels.set_index(df_pca.index)
+        #add the target variable to the dataframe
+
+    df_pca = pd.concat([df_pca, df_labels], axis=1)
+
+    # Rename every column to PC1, PC2, PC3, PC4, PC5 etc based on column index
+    # Get number of columns
+    n_cols = df_pca.shape[1] -1
+
+    for i in range (n_cols):
+        df_pca.rename(columns={i: 'PC' + str(i+1)}, inplace=True)
+
+    # Rename the last column to Class
+    # Get name last column
+    last_col_name = df_pca.columns[-1]
+    df_pca.rename(columns={last_col_name: 'Class'}, inplace=True)
+
+    # # Save the dataframe to a csv file with the delimiter ';'
+    df_pca.to_csv(filename, index=False, sep=";", decimal=",")
+
+def save_model(model, model_name, model_type):
+    """
+    Saves a scikit-learn or Keras model along with its hyperparameters and weights.
+
+    Parameters:
+    model (object): A scikit-learn or Keras model object.
+    model_name (str): The name to give to the saved model.
+    model_type (str): The type of model being saved ('sklearn' or 'keras').
+
+    Returns:
+    None
+    """
+    timestamp = datetime.datetime.now().strftime("%d%m%Y_%H%M%S")
+    folder_name = model_name + '_' + timestamp
+    # Create a directory to save the model files in
+    if not os.path.exists(f'saved_models/{folder_name}'):
+        os.makedirs(f'saved_models/{folder_name}')
+    
+
+    # Save the model weights
+    if model_type == 'sklearn':
+        pickle.dump(model, open(f'saved_models/{folder_name}/{model_name}.pkl', 'wb'))
+    elif model_type == 'keras':
+        # Save the model architecture as a JSON file
+        model_json = model.to_json()
+        with open(f'saved_models/{folder_name}/{model_name}.json', 'w') as json_file:
+            json_file.write(model_json)
+
+        # Save the model weights as an HDF5 file
+        model.save_weights(f'saved_models/{folder_name}/{model_name}.h5')
+
+    # Save the model hyperparameters as a JSON file
+    hyperparameters = model.get_params()
+    with open(f'saved_models/{folder_name}/{model_name}_hyperparameters.json', 'w') as json_file:
+        json.dump(hyperparameters, json_file)
