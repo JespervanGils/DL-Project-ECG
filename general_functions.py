@@ -164,6 +164,11 @@ def save_model(model, model_name, model_type):
     # Save the model weights
     if model_type == 'sklearn':
         pickle.dump(model, open(f'saved_models/{folder_name}/{model_name}.pkl', 'wb'))
+        # Save the model hyperparameters as a JSON file
+        hyperparameters = model.get_params()
+        with open(f'saved_models/{folder_name}/{model_name}_hyperparameters.json', 'w') as json_file:
+            json.dump(hyperparameters, json_file)
+
     elif model_type == 'keras':
         # Save the model architecture as a JSON file
         model_json = model.to_json()
@@ -173,7 +178,3 @@ def save_model(model, model_name, model_type):
         # Save the model weights as an HDF5 file
         model.save_weights(f'saved_models/{folder_name}/{model_name}.h5')
 
-    # Save the model hyperparameters as a JSON file
-    hyperparameters = model.get_params()
-    with open(f'saved_models/{folder_name}/{model_name}_hyperparameters.json', 'w') as json_file:
-        json.dump(hyperparameters, json_file)
