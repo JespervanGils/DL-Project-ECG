@@ -1,0 +1,45 @@
+----------------------------- GPyOpt Report file -----------------------------------
+GPyOpt Version 1.2.6
+Date and time:               Tue Mar 21 18:08:33 2023
+Optimization completed:      NO,7 samples collected.
+Number initial samples:      5 
+Tolerance:                   1e-08.
+Optimization time:           2.9406638145446777 seconds.
+
+-------------------------------- Problem set up ------------------------------------
+Problem name:                no_name
+Problem dimension:           3
+Number continuous variables  0
+Number discrete variables    3
+Number bandits               0
+Noiseless evaluations:       False
+Cost used:                   User defined cost
+Constraints:                  False
+
+------------------------------ Optimization set up ---------------------------------
+Normalized outputs:          True
+Model type:                  GP
+Model update interval:       1
+Acquisition type:            EI
+Acquisition optimizer:       lbfgs
+Acquisition type:            EI
+Acquisition optimizer:       lbfgs
+Evaluator type (batch size): sequential (1)
+Cores used:                  1
+
+--------------------------------- Summary ------------------------------------------
+Value at minimum:            -0.82996994
+Best found minimum location: 2. 4. 2.
+----------------------------------------------------------------------------------------------
+
+---------- Cell outputs ----------
+Fitting model: 1 layers, 5 neurons, tanh 		Best validation accuracy: 79.48 %
+Fitting model: 2 layers, 5 neurons, relu 		Best validation accuracy: 81.11 %
+Fitting model: 1 layers, 4 neurons, relu 		Best validation accuracy: 77.93 %
+Fitting model: 2 layers, 4 neurons, relu 		Best validation accuracy: 83.00 %
+Fitting model: 1 layers, 5 neurons, tanh 		Best validation accuracy: 79.05 %
+Fitting model: 2 layers, 4 neurons, relu 		Best validation accuracy: 80.29 %
+Fitting model: 2 layers, 4 neurons, relu 		Best validation accuracy: 78.40 %
+
+Optimal architecture: 2 layers, 4 neurons per layer, relu activation function
+Optimal validation accuracy: 0.82997
