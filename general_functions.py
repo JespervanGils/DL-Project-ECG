@@ -144,7 +144,7 @@ def save_pca_results_to_csv(pca_model, pca_data, filename):
     # # Save the dataframe to a csv file with the delimiter ';'
     df_pca.to_csv(filename, index=False, sep=";", decimal=",")
 
-def save_model(model, model_name, model_type):
+def save_model(model, model_name, model_type, report):
     """
     Saves a scikit-learn or Keras model along with its hyperparameters and weights.
 
@@ -152,6 +152,7 @@ def save_model(model, model_name, model_type):
     model (object): A scikit-learn or Keras model object.
     model_name (str): The name to give to the saved model.
     model_type (str): The type of model being saved ('sklearn' or 'keras').
+    report: A classification report object.
 
     Returns:
     None
@@ -179,6 +180,12 @@ def save_model(model, model_name, model_type):
 
         # Save the model weights as an HDF5 file
         model.save_weights(f'saved_models/{folder_name}/{model_name}.h5')
+
+    if not report == None:
+        # open a file for writing the report to
+        with open(f'saved_models/{folder_name}/{model_name}classification_report.txt', 'w') as f:
+            # write the report to the file
+            f.write(report)
 
 # Define a custom function to create an ANN model from inputs 
 def ann_network(num_layers, num_neurons_last_hidden, activation_function, num_classes, X_train):
