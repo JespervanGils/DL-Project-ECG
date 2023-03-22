@@ -8,6 +8,8 @@ import pickle
 import json
 from keras.models import model_from_json
 import datetime
+import tensorflow as tf
+from keras.layers import Convolution1D, MaxPool1D, Flatten, Dense, BatchNormalization
 
 # Def to combine all CSV files in a directory into a single DataFrame
 def combine_csv_files_to_df(dir_path):
@@ -178,3 +180,110 @@ def save_model(model, model_name, model_type):
         # Save the model weights as an HDF5 file
         model.save_weights(f'saved_models/{folder_name}/{model_name}.h5')
 
+# Define a custom function to create an ANN model from inputs 
+def ann_network(num_layers, num_neurons_last_hidden, activation_function, num_classes, X_train):
+    model = tf.keras.models.Sequential()
+    
+    # generate the number of neurons for the different layers
+    # num_neurons_last_hidden specifies the number of neurons for the last hidden layer
+    # the pattern follos the pattern from the ANN model from iteration 3
+    if num_layers > 15:
+        print("Error: number of layers cannot be greater than 15")
+
+    neur_lst = []
+    for i in range(num_layers):
+        if i == 0:
+            neur_lst.append(num_neurons_last_hidden)
+        elif i == 1 or i == 2:
+            neur_lst.append(num_neurons_last_hidden * (2 ** i))
+        elif i == 3:
+            neur_lst.append(neur_lst[i-1])
+        elif i == 4:
+            neur_lst.append(num_neurons_last_hidden * (2 ** (i-1)))
+        elif i == 5:
+            neur_lst.append(neur_lst[i-1])
+        elif i == 6:
+            neur_lst.append(num_neurons_last_hidden * (2 ** (i-2)))
+        elif i == 7:
+            neur_lst.append(neur_lst[i-1])
+        elif i == 8:
+            neur_lst.append(num_neurons_last_hidden * (2 ** (i-3)))
+        elif i == 9:
+            neur_lst.append(neur_lst[i-1])
+        elif i == 10:
+            neur_lst.append(num_neurons_last_hidden * (2 ** (i-4)))
+        elif i == 11:
+            neur_lst.append(neur_lst[i-1])
+        elif i == 12:
+            neur_lst.append(num_neurons_last_hidden * (2 ** (i-5)))
+        elif i == 13:
+            neur_lst.append(neur_lst[i-1])
+        elif i == 14:
+            neur_lst.append(num_neurons_last_hidden * (2 ** (i-6)))
+        elif i == 15:
+            neur_lst.append(neur_lst[i-1])
+
+    neur_lst = neur_lst[::-1]
+        
+    # create the model
+    for i in range(num_layers):
+        if i == 0:
+            model.add(tf.keras.layers.Dense(neur_lst[i], activation=activation_function, input_dim=X_train.shape[1]))
+        else:
+            model.add(tf.keras.layers.Dense(neur_lst[i], activation=activation_function))
+    
+    # cover the case for 2 class and 5 class classification
+    if num_classes == 2:
+        model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
+        model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+    elif num_classes > 2:
+        model.add(tf.keras.layers.Dense(num_classes, activation='softmax'))
+        model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+    else:
+        print("Error: num_classes must be greater or equal than 2")
+
+    return model
+
+# Define a custom function to create an CNN model from inputs 
+def cnn_network(num_conv_blocks, strides, num_dense_layers, num_neurons_last_hidden, num_classes, X_train): # num_neurons_last_hidden, activation_function, num_classes, X_train):
+
+    model = tf.keras.models.Sequential()
+
+    pool_sizes = [2, 2, 3, 3, 4, 4]
+    masked_pools = pool_sizes[0:num_conv_blocks][::-1]
+
+    kernel_sizes = [3, 3, 6, 6, 9, 9]
+    masked_kernels = kernel_sizes[0:num_conv_blocks][::-1]
+
+    if num_conv_blocks > 6:
+        print("Error: num_conv_blocks cannot be greater than 6")
+    
+    # Convolutional blocks
+    for i in range(num_conv_blocks):
+        if i == 0:
+            model.add(Convolution1D(64, (masked_kernels[i]), activation='relu', input_shape=(X_train.shape[1],1)))
+        else:
+            model.add(Convolution1D(64, (masked_kernels[i]), activation='relu'))
+        model.add(BatchNormalization())
+        model.add(MaxPool1D(pool_size=(masked_pools[i]), strides=(strides), padding="same"))
+
+    # Flatten layer
+    model.add(Flatten())
+
+    # Dense layers
+    max_neurons = num_neurons_last_hidden * (2 ** (num_dense_layers - 1))
+    for i in range(num_dense_layers):
+        neurons = max_neurons / (2 ** i)
+        model.add(Dense(neurons, activation='relu'))
+
+    # Last layer and compile
+    if num_classes == 2:
+        model.add(Dense(1, activation='sigmoid'))
+        model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+    elif num_classes > 2:
+        model.add(Dense(num_classes, activation='softmax'))
+        model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+    else:
+        print("Error: num_classes must be greater or equal than 2")
+
+    return model
