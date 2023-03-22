@@ -1,0 +1,95 @@
+----------------------------- GPyOpt Report file -----------------------------------
+GPyOpt Version 1.2.6
+Date and time:               Wed Mar 22 00:00:28 2023
+Optimization completed:      NO,57 samples collected.
+Number initial samples:      50 
+Tolerance:                   1e-08.
+Optimization time:           1108.9934170246124 seconds.
+
+-------------------------------- Problem set up ------------------------------------
+Problem name:                no_name
+Problem dimension:           4
+Number continuous variables  0
+Number discrete variables    4
+Number bandits               0
+Noiseless evaluations:       True
+Cost used:                   User defined cost
+Constraints:                  False
+
+------------------------------ Optimization set up ---------------------------------
+Normalized outputs:          True
+Model type:                  GP
+Model update interval:       1
+Acquisition type:            EI
+Acquisition optimizer:       lbfgs
+Acquisition type:            EI
+Acquisition optimizer:       lbfgs
+Evaluator type (batch size): sequential (1)
+Cores used:                  1
+
+--------------------------------- Summary ------------------------------------------
+Value at minimum:            -0.99570632
+Best found minimum location:  3.  1.  3. 64.
+----------------------------------------------------------------------------------------------
+
+---------- Cell outputs ----------
+Fitting model: 3 conv blocks, 2 striding for pool, 4 dense layers, 32 neurons on last dense layer 		Best validation accuracy: 98.93 %
+Fitting model: 2 conv blocks, 1 striding for pool, 1 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 98.33 %
+Fitting model: 5 conv blocks, 2 striding for pool, 2 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 99.06 %
+Fitting model: 3 conv blocks, 2 striding for pool, 1 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 96.57 %
+Fitting model: 4 conv blocks, 1 striding for pool, 4 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 97.17 %
+Fitting model: 6 conv blocks, 2 striding for pool, 3 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 98.84 %
+Fitting model: 6 conv blocks, 1 striding for pool, 4 dense layers, 32 neurons on last dense layer 		Best validation accuracy: 98.11 %
+Fitting model: 6 conv blocks, 1 striding for pool, 4 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 99.44 %
+Fitting model: 3 conv blocks, 1 striding for pool, 4 dense layers, 16 neurons on last dense layer 		Best validation accuracy: 98.54 %
+Fitting model: 3 conv blocks, 1 striding for pool, 3 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 99.10 %
+Fitting model: 2 conv blocks, 2 striding for pool, 4 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 97.98 %
+Fitting model: 2 conv blocks, 2 striding for pool, 2 dense layers, 16 neurons on last dense layer 		Best validation accuracy: 99.44 %
+Fitting model: 1 conv blocks, 1 striding for pool, 3 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 94.38 %
+Fitting model: 1 conv blocks, 1 striding for pool, 2 dense layers, 16 neurons on last dense layer 		Best validation accuracy: 97.08 %
+Fitting model: 5 conv blocks, 1 striding for pool, 2 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 99.01 %
+Fitting model: 5 conv blocks, 1 striding for pool, 4 dense layers, 16 neurons on last dense layer 		Best validation accuracy: 96.87 %
+Fitting model: 5 conv blocks, 2 striding for pool, 2 dense layers, 16 neurons on last dense layer 		Best validation accuracy: 98.80 %
+Fitting model: 5 conv blocks, 2 striding for pool, 1 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 99.31 %
+Fitting model: 1 conv blocks, 1 striding for pool, 2 dense layers, 16 neurons on last dense layer 		Best validation accuracy: 98.84 %
+Fitting model: 5 conv blocks, 1 striding for pool, 1 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 98.97 %
+Fitting model: 2 conv blocks, 1 striding for pool, 4 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 85.02 %
+Fitting model: 5 conv blocks, 2 striding for pool, 1 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 99.31 %
+Fitting model: 3 conv blocks, 2 striding for pool, 1 dense layers, 16 neurons on last dense layer 		Best validation accuracy: 97.72 %
+Fitting model: 6 conv blocks, 1 striding for pool, 2 dense layers, 16 neurons on last dense layer 		Best validation accuracy: 96.99 %
+Fitting model: 2 conv blocks, 1 striding for pool, 3 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 98.11 %
+Fitting model: 5 conv blocks, 1 striding for pool, 2 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 98.37 %
+Fitting model: 1 conv blocks, 1 striding for pool, 3 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 96.48 %
+Fitting model: 3 conv blocks, 1 striding for pool, 1 dense layers, 32 neurons on last dense layer 		Best validation accuracy: 98.20 %
+Fitting model: 1 conv blocks, 1 striding for pool, 1 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 97.90 %
+Fitting model: 1 conv blocks, 1 striding for pool, 3 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 98.24 %
+Fitting model: 5 conv blocks, 1 striding for pool, 4 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 98.84 %
+Fitting model: 2 conv blocks, 1 striding for pool, 3 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 99.53 %
+Fitting model: 5 conv blocks, 1 striding for pool, 2 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 99.48 %
+Fitting model: 3 conv blocks, 1 striding for pool, 3 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 97.38 %
+Fitting model: 5 conv blocks, 1 striding for pool, 4 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 98.63 %
+Fitting model: 5 conv blocks, 1 striding for pool, 3 dense layers, 32 neurons on last dense layer 		Best validation accuracy: 91.50 %
+Fitting model: 3 conv blocks, 1 striding for pool, 3 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 99.57 %
+Fitting model: 5 conv blocks, 2 striding for pool, 1 dense layers, 32 neurons on last dense layer 		Best validation accuracy: 98.37 %
+Fitting model: 1 conv blocks, 2 striding for pool, 4 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 97.29 %
+Fitting model: 5 conv blocks, 1 striding for pool, 3 dense layers, 32 neurons on last dense layer 		Best validation accuracy: 97.81 %
+Fitting model: 5 conv blocks, 2 striding for pool, 4 dense layers, 32 neurons on last dense layer 		Best validation accuracy: 99.10 %
+Fitting model: 2 conv blocks, 2 striding for pool, 3 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 97.12 %
+Fitting model: 4 conv blocks, 1 striding for pool, 1 dense layers, 32 neurons on last dense layer 		Best validation accuracy: 98.45 %
+Fitting model: 6 conv blocks, 2 striding for pool, 4 dense layers, 32 neurons on last dense layer 		Best validation accuracy: 98.93 %
+Fitting model: 1 conv blocks, 2 striding for pool, 4 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 98.07 %
+Fitting model: 1 conv blocks, 1 striding for pool, 1 dense layers, 16 neurons on last dense layer 		Best validation accuracy: 97.47 %
+Fitting model: 5 conv blocks, 2 striding for pool, 3 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 98.97 %
+Fitting model: 1 conv blocks, 1 striding for pool, 3 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 96.31 %
+Fitting model: 6 conv blocks, 1 striding for pool, 3 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 96.18 %
+Fitting model: 4 conv blocks, 1 striding for pool, 1 dense layers, 16 neurons on last dense layer 		Best validation accuracy: 96.31 %
+Fitting model: 5 conv blocks, 2 striding for pool, 2 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 99.14 %
+Fitting model: 5 conv blocks, 1 striding for pool, 1 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 98.67 %
+Fitting model: 6 conv blocks, 1 striding for pool, 3 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 98.37 %
+Fitting model: 2 conv blocks, 2 striding for pool, 3 dense layers, 16 neurons on last dense layer 		Best validation accuracy: 97.34 %
+Fitting model: 5 conv blocks, 1 striding for pool, 2 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 99.06 %
+Fitting model: 5 conv blocks, 2 striding for pool, 2 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 99.10 %
+Fitting model: 5 conv blocks, 2 striding for pool, 2 dense layers, 64 neurons on last dense layer 		Best validation accuracy: 98.50 %
+
+Optimal architecture: 3 conv blocks, 1 striding for pool, 3 dense layers, 64 neurons on last dense layer
+Optimal validation accuracy: 0.99571
