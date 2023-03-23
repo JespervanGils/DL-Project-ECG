@@ -144,7 +144,7 @@ def save_pca_results_to_csv(pca_model, pca_data, filename):
     # # Save the dataframe to a csv file with the delimiter ';'
     df_pca.to_csv(filename, index=False, sep=";", decimal=",")
 
-def save_model(model, model_name, model_type, report):
+def save_model(model, model_name, model_type, report=None):
     """
     Saves a scikit-learn or Keras model along with its hyperparameters and weights.
 
