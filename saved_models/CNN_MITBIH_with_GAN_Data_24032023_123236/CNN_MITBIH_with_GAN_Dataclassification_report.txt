@@ -1,0 +1,10 @@
+                                   precision    recall  f1-score   support
+
+                           Normal     0.9946    0.9971    0.9958     18118
+                 Artial Premature     0.9268    0.8651    0.8949       556
+Premature ventricular contraction     0.9847    0.9807    0.9827      1448
+                            Paced     0.9944    0.9932    0.9938      1608
+
+                         accuracy                         0.9923     21730
+                        macro avg     0.9751    0.9590    0.9668     21730
+                     weighted avg     0.9922    0.9923    0.9922     21730
