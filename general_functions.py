@@ -45,6 +45,7 @@ def plot_hist(df, class_number,size,min_,bins):
     # print(len(img_flatten))
     plt.hist2d(final1,img_flatten, bins=(bins,bins),cmap=plt.cm.jet)
     plt.show()
+    return final1, img_flatten, bins
 
 def get_random_data_from_class(df, class_number, n_examples=5):
     filtered_df = df[df[187] == class_number]
