@@ -1,0 +1,22 @@
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\multicolumn{7}{|c|}{Random Forest with hyperparameter tuning} \\
+\hline
+ & Class N & Class S & Class V & Class Q & Total (Macro) & Total (Weighted) \\
+\hline
+Accuracy & 0.9991 & 0.5881 & 0.8854 & 0.9428 & 0.8538 & 0.9769 \\
+\hline
+Precision & 0.9743 & 0.9790 & 0.9923 & 0.9948 & 0.9851 & 0.9771 \\
+\hline
+Recall & 0.9991 & 0.5881 & 0.8854 & 0.9428 & 0.8538 & 0.9769 \\
+\hline
+F1-Score & 0.9865 & 0.7348 & 0.9358 & 0.9681 & 0.9063 & 0.9753 \\
+\hline
+FPR & - & - & - & - & - &0.0553 \\
+\hline
+\end{tabular}
+\caption{Results for Random Forest with hyperparameter tuning}
+\label{tab:Random Forest with hyperparameter tuning_Results}
+\end{table}
