@@ -1,0 +1,22 @@
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\multicolumn{5}{|c|}{SVM with hyperparameter tuning} \\
+\hline
+ & Class "Normal" & Class "Abnormal" & Total (Macro) & Total (Weighted) \\
+\hline
+Accuracy & 0.9258 & 0.9862 & 0.9560 & 0.9694 \\
+\hline
+Precision & 0.9627 & 0.9719 & 0.9673 & 0.9693 \\
+\hline
+Recall & 0.9258 & 0.9862 & 0.9560 & 0.9694 \\
+\hline
+F1-Score & 0.9439 & 0.9790 & 0.9615 & 0.9692 \\
+\hline
+FPR & - & - & - & 0.0138 \\
+\hline
+\end{tabular}
+\caption{Results for SVM with hyperparameter tuning}
+\label{tab:ptb_SVM with hyperparameter tuning_Results}
+\end{table}
