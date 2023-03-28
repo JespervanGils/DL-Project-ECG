@@ -1,0 +1,22 @@
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\multicolumn{7}{|c|}{RF} \\
+\hline
+ & Class "Normal" & Class "Abnormal" & Total (Macro) & Total (Weighted) \\
+\hline
+Accuracy & 0.9036 & 0.9910 & 0.9473 & 0.9667 \\
+\hline
+Precision & 0.9747 & 0.9639 & 0.9693 & 0.9669 \\
+\hline
+Recall & 0.9036 & 0.9910 & 0.9473 & 0.9667 \\
+\hline
+F1-Score & 0.9378 & 0.9772 & 0.9575 & 0.9663 \\
+\hline
+FPR & - & - & - & 0.0090 \\
+\hline
+\end{tabular}
+\caption{Results for RF}
+\label{tab:RF_Results}
+\end{table}

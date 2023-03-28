@@ -1,0 +1,46 @@
+----------------------------- GPyOpt Report file -----------------------------------
+GPyOpt Version 1.2.6
+Date and time:               Tue Mar 21 18:34:31 2023
+Optimization completed:      YES, 8 samples collected.
+Number initial samples:      5 
+Tolerance:                   1e-08.
+Optimization time:           45.28522539138794 seconds.
+
+-------------------------------- Problem set up ------------------------------------
+Problem name:                no_name
+Problem dimension:           4
+Number continuous variables  0
+Number discrete variables    4
+Number bandits               0
+Noiseless evaluations:       False
+Cost used:                   User defined cost
+Constraints:                  False
+
+------------------------------ Optimization set up ---------------------------------
+Normalized outputs:          True
+Model type:                  GP
+Model update interval:       1
+Acquisition type:            EI
+Acquisition optimizer:       lbfgs
+Acquisition type:            EI
+Acquisition optimizer:       lbfgs
+Evaluator type (batch size): sequential (1)
+Cores used:                  1
+
+--------------------------------- Summary ------------------------------------------
+Value at minimum:            -0.86603695
+Best found minimum location: 1. 1. 2. 8.
+----------------------------------------------------------------------------------------------
+
+---------- Cell outputs ----------
+Fitting model: 1 conv blocks, 2 striding for pool, 2 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 72.18 %
+Fitting model: 1 conv blocks, 1 striding for pool, 2 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 73.47 %
+Fitting model: 2 conv blocks, 1 striding for pool, 2 dense layers, 4 neurons on last dense layer 		Best validation accuracy: 53.84 %
+Fitting model: 2 conv blocks, 2 striding for pool, 2 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 55.52 %
+Fitting model: 1 conv blocks, 2 striding for pool, 1 dense layers, 4 neurons on last dense layer 		Best validation accuracy: 76.51 %
+Fitting model: 2 conv blocks, 2 striding for pool, 1 dense layers, 4 neurons on last dense layer 		Best validation accuracy: 27.91 %
+Fitting model: 2 conv blocks, 1 striding for pool, 1 dense layers, 4 neurons on last dense layer 		Best validation accuracy: 28.34 %
+Fitting model: 1 conv blocks, 1 striding for pool, 2 dense layers, 8 neurons on last dense layer 		Best validation accuracy: 86.60 %
+
+Optimal architecture: 1 conv blocks, 1 striding for pool, 2 dense layers, 8 neurons on last dense layer
+Optimal validation accuracy: 0.86604
