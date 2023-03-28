@@ -145,7 +145,7 @@ def save_pca_results_to_csv(pca_model, pca_data, filename):
     # # Save the dataframe to a csv file with the delimiter ';'
     df_pca.to_csv(filename, index=False, sep=";", decimal=",")
 
-def save_model(model, model_name, model_type, report=None):
+def save_model(model, model_name, model_type):
     """
     Saves a scikit-learn or Keras model along with its hyperparameters and weights.
 
@@ -153,7 +153,6 @@ def save_model(model, model_name, model_type, report=None):
     model (object): A scikit-learn or Keras model object.
     model_name (str): The name to give to the saved model.
     model_type (str): The type of model being saved ('sklearn' or 'keras').
-    report: A classification report object.
 
     Returns:
     None
@@ -181,12 +180,6 @@ def save_model(model, model_name, model_type, report=None):
 
         # Save the model weights as an HDF5 file
         model.save_weights(f'saved_models/{folder_name}/{model_name}.h5')
-
-    if not report == None:
-        # open a file for writing the report to
-        with open(f'saved_models/{folder_name}/{model_name}classification_report.txt', 'w') as f:
-            # write the report to the file
-            f.write(report)
 
 # Define a custom function to create an ANN model from inputs 
 def ann_network(num_layers, num_neurons_last_hidden, activation_function, num_classes, X_train):
@@ -297,7 +290,7 @@ def cnn_network(num_conv_blocks, strides, num_dense_layers, num_neurons_last_hid
     return model
 
 
-def results_table_latex(cm, report, name):
+def results_table_latex(cm, report, name, num_classes=4):
     # Calculate the accurcay for each label
     acc_per_class = cm.diagonal()/cm.sum(axis=1)
     # Take the avearge of the accuracies
@@ -315,50 +308,97 @@ def results_table_latex(cm, report, name):
         total_wrong_predicted = total_wrong_predicted + wrong_predicted
     FPR = wrong_predicted/total_abnormal_class
 
-    # Extract values from classification report
-    values = report.split()  # Split report by whitespace
-    accuracy = values[values.index('accuracy') + 1]
-    precision_0 = values[values.index('0.0') + 1]
-    precision_1 = values[values.index('1.0') + 1]
-    precision_2 = values[values.index('2.0') + 1]
-    precision_3 = values[values.index('3.0') + 1]
-    recall_0 = values[values.index('0.0') + 2]
-    recall_1 = values[values.index('1.0') + 2]
-    recall_2 = values[values.index('2.0') + 2]
-    recall_3 = values[values.index('3.0') + 2]
-    f1score_0 = values[values.index('0.0') + 3]
-    f1score_1 = values[values.index('1.0') + 3]
-    f1score_2 = values[values.index('2.0') + 3]
-    f1score_3 = values[values.index('3.0') + 3]
+    if num_classes == 4:
 
-    precision_macro = values[values.index('macro') + 2]
-    recall_macro = values[values.index('macro') + 3]
-    f1score_macro = values[values.index('macro') + 4]
-    precision_weighted = values[values.index('weighted') + 2]
-    recall_weighted = values[values.index('weighted') + 3]
-    f1score_weighted = values[values.index('weighted') + 4]
+        # Extract values from classification report
+        values = report.split()  # Split report by whitespace
+        accuracy = values[values.index('accuracy') + 1]
+        precision_0 = values[values.index('0.0') + 1]
+        precision_1 = values[values.index('1.0') + 1]
+        precision_2 = values[values.index('2.0') + 1]
+        precision_3 = values[values.index('3.0') + 1]
+        recall_0 = values[values.index('0.0') + 2]
+        recall_1 = values[values.index('1.0') + 2]
+        recall_2 = values[values.index('2.0') + 2]
+        recall_3 = values[values.index('3.0') + 2]
+        f1score_0 = values[values.index('0.0') + 3]
+        f1score_1 = values[values.index('1.0') + 3]
+        f1score_2 = values[values.index('2.0') + 3]
+        f1score_3 = values[values.index('3.0') + 3]
+
+        precision_macro = values[values.index('macro') + 2]
+        recall_macro = values[values.index('macro') + 3]
+        f1score_macro = values[values.index('macro') + 4]
+        precision_weighted = values[values.index('weighted') + 2]
+        recall_weighted = values[values.index('weighted') + 3]
+        f1score_weighted = values[values.index('weighted') + 4]
+        
+
+        with open(f"{name}_latex_table.txt", "w") as f:
+            f.write(f"\\begin{{table}}[H]\n")
+            f.write(f"\\centering\n")
+            f.write(f"\\begin{{tabular}}{{|l|c|c|c|c|c|c|}}\n")
+            f.write(f"\\hline\n")
+            f.write(f"\\multicolumn{{7}}{{|c|}}{{{name}}} \\\\\n")
+            f.write(f"\\hline\n")
+            f.write(f" & Class N & Class S & Class V & Class Q & Total (Macro) & Total (Weighted) \\\\\n")
+            f.write(f"\\hline\n")
+            f.write(f"Accuracy & {acc_per_class[0]:.4f} & {acc_per_class[1]:.4f} & {acc_per_class[2]:.4f} & {acc_per_class[3]:.4f} & {acc_average:.4f} & {accuracy} \\\\\n")
+            f.write(f"\\hline\n")
+            f.write(f"Precision & {precision_0} & {precision_1} & {precision_2} & {precision_3} & {precision_macro} & {precision_weighted} \\\\\n")
+            f.write(f"\\hline\n")
+            f.write(f"Recall & {recall_0} & {recall_1} & {recall_2} & {recall_3} & {recall_macro} & {recall_weighted} \\\\\n")
+            f.write(f"\\hline\n")
+            f.write(f"F1-Score & {f1score_0} & {f1score_1} & {f1score_2} & {f1score_3} & {f1score_macro} & {f1score_weighted} \\\\\n")
+            f.write(f"\\hline\n")
+            f.write(f"FPR & - & - & - & - & - &{FPR:.4f} \\\\\n")
+            f.write(f"\\hline\n")
+            f.write(f"\\end{{tabular}}\n")
+            f.write(f"\\caption{{Results for {name}}}\n")
+            f.write(f"\\label{{tab:{name}_Results}}\n")
+            f.write(f"\\end{{table}}\n")
     
+    # For two classes 
+    elif num_classes == 2:
 
-    with open(f"{name}_latex_table.txt", "w") as f:
-        f.write(f"\\begin{{table}}[H]\n")
-        f.write(f"\\centering\n")
-        f.write(f"\\begin{{tabular}}{{|l|c|c|c|c|c|c|}}\n")
-        f.write(f"\\hline\n")
-        f.write(f"\\multicolumn{{7}}{{|c|}}{{{name}}} \\\\\n")
-        f.write(f"\\hline\n")
-        f.write(f" & Class N & Class S & Class V & Class Q & Total (Macro) & Total (Weighted) \\\\\n")
-        f.write(f"\\hline\n")
-        f.write(f"Accuracy & {acc_per_class[0]:.4f} & {acc_per_class[1]:.4f} & {acc_per_class[2]:.4f} & {acc_per_class[3]:.4f} & {acc_average:.4f} & {accuracy} \\\\\n")
-        f.write(f"\\hline\n")
-        f.write(f"Precision & {precision_0} & {precision_1} & {precision_2} & {precision_3} & {precision_macro} & {precision_weighted} \\\\\n")
-        f.write(f"\\hline\n")
-        f.write(f"Recall & {recall_0} & {recall_1} & {recall_2} & {recall_3} & {recall_macro} & {recall_weighted} \\\\\n")
-        f.write(f"\\hline\n")
-        f.write(f"F1-Score & {f1score_0} & {f1score_1} & {f1score_2} & {f1score_3} & {f1score_macro} & {f1score_weighted} \\\\\n")
-        f.write(f"\\hline\n")
-        f.write(f"FPR & - & - & - & - & - &{FPR:.4f} \\\\\n")
-        f.write(f"\\hline\n")
-        f.write(f"\\end{{tabular}}\n")
-        f.write(f"\\caption{{Results for {name}}}\n")
-        f.write(f"\\label{{tab:{name}_Results}}\n")
-        f.write(f"\\end{{table}}\n")
+        # Extract values from classification report
+        values = report.split()  # Split report by whitespace
+        accuracy = values[values.index('accuracy') + 1]
+        precision_0 = values[values.index('Normal') + 1]
+        precision_1 = values[values.index('Abnormal') + 1]
+        recall_0 = values[values.index('Normal') + 2]
+        recall_1 = values[values.index('Abnormal') + 2]
+        f1score_0 = values[values.index('Normal') + 3]
+        f1score_1 = values[values.index('Abnormal') + 3]
+
+        precision_macro = values[values.index('macro') + 2]
+        recall_macro = values[values.index('macro') + 3]
+        f1score_macro = values[values.index('macro') + 4]
+        precision_weighted = values[values.index('weighted') + 2]
+        recall_weighted = values[values.index('weighted') + 3]
+        f1score_weighted = values[values.index('weighted') + 4]
+        
+
+        with open(f"{name}_latex_table.txt", "w") as f:
+            f.write(f"\\begin{{table}}[H]\n")
+            f.write(f"\\centering\n")
+            f.write(f"\\begin{{tabular}}{{|l|c|c|c|c|}}\n")
+            f.write(f"\\hline\n")
+            f.write(f"\\multicolumn{{5}}{{|c|}}{{{name}}} \\\\\n")
+            f.write(f"\\hline\n")
+            f.write(f' & Class "Normal" & Class "Abnormal" & Total (Macro) & Total (Weighted) \\\\\n')
+            f.write(f"\\hline\n")
+            f.write(f"Accuracy & {acc_per_class[0]:.4f} & {acc_per_class[1]:.4f} & {acc_average:.4f} & {accuracy} \\\\\n")
+            f.write(f"\\hline\n")
+            f.write(f"Precision & {precision_0} & {precision_1} & {precision_macro} & {precision_weighted} \\\\\n")
+            f.write(f"\\hline\n")
+            f.write(f"Recall & {recall_0} & {recall_1} & {recall_macro} & {recall_weighted} \\\\\n")
+            f.write(f"\\hline\n")
+            f.write(f"F1-Score & {f1score_0} & {f1score_1} & {f1score_macro} & {f1score_weighted} \\\\\n")
+            f.write(f"\\hline\n")
+            f.write(f"FPR & - & - & - & {FPR:.4f} \\\\\n")
+            f.write(f"\\hline\n")
+            f.write(f"\\end{{tabular}}\n")
+            f.write(f"\\caption{{Results for {name}}}\n")
+            f.write(f"\\label{{tab:ptb_{name}_Results}}\n")
+            f.write(f"\\end{{table}}\n")
